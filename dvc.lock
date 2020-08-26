@@ -1,0 +1,8 @@
+clean:
+  cmd: python src/clean.py
+  deps:
+  - path: data/raw
+    md5: 23a694225ed6b59d8a243beef6dd8520.dir
+  outs:
+  - path: data/clean
+    md5: c2bc167e4fd0f4bbe0328b9d65c93ba6.dir

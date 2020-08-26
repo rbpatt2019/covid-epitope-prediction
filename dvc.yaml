@@ -1,0 +1,7 @@
+stages:
+  clean:
+    cmd: python src/clean.py
+    deps:
+    - data/raw
+    outs:
+    - data/clean
