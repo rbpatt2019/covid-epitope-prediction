@@ -5,3 +5,10 @@ stages:
     - data/raw
     outs:
     - data/clean
+  features:
+    cmd: python src/features.py
+    deps:
+    - data/clean
+    - src/features.py
+    outs:
+    - data/featured
