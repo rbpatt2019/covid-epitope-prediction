@@ -1,0 +1,3 @@
+outs:
+- md5: 2e0d30ffe5dc9688633d90a20607b193
+  path: input_sars.csv

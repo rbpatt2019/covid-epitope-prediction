@@ -1,0 +1,3 @@
+outs:
+- md5: a5e0a7e5f6097e2ec24dfa8ef5413ab5
+  path: input_covid.csv
