@@ -12,3 +12,10 @@ stages:
     - src/features.py
     outs:
     - data/featured
+  model:
+    cmd: python src/model.py
+    deps:
+    - data/featured
+    - src/model.py
+    outs:
+    - models/untrained.joblib

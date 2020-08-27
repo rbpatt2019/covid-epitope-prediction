@@ -16,3 +16,13 @@ features:
   outs:
   - path: data/featured
     md5: 6a7f75c48680d8e8f6c12fe79bda733d.dir
+model:
+  cmd: python src/model.py
+  deps:
+  - path: data/featured
+    md5: 6a7f75c48680d8e8f6c12fe79bda733d.dir
+  - path: src/model.py
+    md5: d19cd452bb5069f027cab552fee69fcf
+  outs:
+  - path: models/untrained.joblib
+    md5: bd87d3d42354ebf3661ee1ebc73aed5b
