@@ -19,3 +19,6 @@ stages:
     - src/model.py
     outs:
     - models/untrained.joblib
+    params:
+    - cv
+    - seed
