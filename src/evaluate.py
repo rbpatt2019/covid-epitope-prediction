@@ -2,10 +2,10 @@
 import time
 from pathlib import Path
 
+import joblib
 import numpy as np
 import pandas as pd
 import yaml
-from joblib import dump, load
 from sklearn.metrics import (
     auc,
     precision_recall_curve,
@@ -26,7 +26,7 @@ X = data.iloc[:, :-1].to_numpy()
 y = data.iloc[:, -1].to_numpy()
 del data
 
-pl = load(Path("models", "untrained.joblib"))
+pl = joblib.load(Path("models", "untrained.joblib"))
 
 # Will use StratifiedKFold and manual looping
 # Builtin cross_validate functions are only easily usable with metrics returning
@@ -87,7 +87,7 @@ metrics = {
     "Mean Training Time": np.mean(train_time),
     "St.Dev. Training Time": np.std(train_time),
 }
-dump(metrics, Path("results", "metrics.yaml"))
+yaml.safe_dump(metrics, Path("results", "metrics.yaml"))
 
 # And plots
 pr_curve = pd.DataFrame({"Recall": recall_curve, "Precision": precision_curve})
@@ -97,3 +97,7 @@ roc_curve = pd.DataFrame(
     {"False Positive Rate": fpr_roc, "True Positive Rate": tpr_roc}
 )
 roc_curve.to_csv(Path("results", "roc_curve.csv"), index=False)
+
+# Finally, train on whole data and dump
+pl.fit(X, y)
+joblib.dump(pl, Path("models", "trained.joblib"))
