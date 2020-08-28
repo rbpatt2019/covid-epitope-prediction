@@ -1,0 +1,12 @@
+{
+  "Mean Precision": 0.2932001604126711,
+  "St.Dev. Precision": 0.16365460744464982,
+  "Mean Recall": 0.08463694329877981,
+  "St.Dev. Recall": 0.07371950965776355,
+  "Mean F-score": 0.1202331633676429,
+  "St.Dev. F-score": 0.08972387099917375,
+  "Mean AUC": 0.5330122471090528,
+  "St.Dev. AUC": 0.028948956787381016,
+  "Mean Training Time": 0.08785548210144042,
+  "St.Dev. Training Time": 0.006749131084631559
+}

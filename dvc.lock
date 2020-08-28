@@ -30,3 +30,23 @@ model:
   outs:
   - path: models/untrained.joblib
     md5: bd87d3d42354ebf3661ee1ebc73aed5b
+evaulate:
+  cmd: python src/evaluate.py
+  deps:
+  - path: data/featured
+    md5: 6a7f75c48680d8e8f6c12fe79bda733d.dir
+  - path: models/untrained.joblib
+    md5: bd87d3d42354ebf3661ee1ebc73aed5b
+  params:
+    params.yaml:
+      cv: 5
+      seed: 42
+  outs:
+  - path: models/trained.joblib
+    md5: 3c72b27ce6004ed5a93fa57f03a14bac
+  - path: results/metrics.json
+    md5: 9e2caed5f9797c150ed86a12871da33c
+  - path: results/pr_curve.csv
+    md5: 178e92aafbffdfe20ece6312fce39fbf
+  - path: results/roc_curve.csv
+    md5: 43dd4397198baa578e89914e02ec207e
