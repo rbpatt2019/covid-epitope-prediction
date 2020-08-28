@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import time
 from pathlib import Path
 from statistics import mean, stdev
@@ -76,13 +77,6 @@ for train_idx, test_idx in skf.split(X, y):
 auc_score = [auc(x, y) for x, y in zip(fpr_roc, tpr_roc)]
 
 # Now dump metrics
-def float_representer(dumper, value):
-    text = "{0:.4f}".format(value)
-    return dumper.represent_scalar(u"tag:yaml.org,2002:float", text)
-
-
-yaml.SafeDumper.add_representer(float, float_representer)
-
 metrics = {
     "Mean Precision": mean(precision),
     "St.Dev. Precision": stdev(precision),
@@ -95,7 +89,7 @@ metrics = {
     "Mean Training Time": mean(train_time),
     "St.Dev. Training Time": stdev(train_time),
 }
-yaml.safe_dump(metrics, Path("results", "metrics.yaml"))
+json.dump(metrics, Path("results", "metrics.json"), indent=2)
 
 # And plots
 pr_curve = pd.DataFrame(
