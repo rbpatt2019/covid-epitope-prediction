@@ -103,14 +103,14 @@ with open(Path("results", "metrics.json"), "w") as file:
 
 # And plots
 pr_curve = pd.DataFrame(
-    {"Recall": np.linspace(0, 1, pr_len), "Precision": np.mean(precision_curve)}
+    {"Recall": np.linspace(0, 1, pr_len), "Precision": np.mean(precision_curve, axis=0)}
 )
 pr_curve.to_csv(Path("results", "pr_curve.csv"), index=False)
 
 roc_curve = pd.DataFrame(
     {
         "False Positive Rate": np.linspace(0, 1, roc_len),
-        "True Positive Rate": np.mean(tpr_roc),
+        "True Positive Rate": np.mean(tpr_roc, axis=0),
     }
 )
 roc_curve.to_csv(Path("results", "roc_curve.csv"), index=False)
