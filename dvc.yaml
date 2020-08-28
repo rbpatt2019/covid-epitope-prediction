@@ -41,3 +41,13 @@ stages:
         cache: false
     - results/roc_curve.csv:
         cache: false
+  predict:
+    cmd: python src/predict.py
+    deps:
+    - data/featured
+    - models/trained.joblib
+    - src/predict.py
+    params:
+    - seed
+    outs:
+    - results/predictions.joblib

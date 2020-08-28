@@ -52,3 +52,18 @@ evaulate:
     md5: 188726a379fdaf3d9de0b11c6ee4898c
   - path: results/roc_curve.csv
     md5: 5025661433dd48de436a6610c89aa475
+predict:
+  cmd: python src/predict.py
+  deps:
+  - path: data/featured
+    md5: 6a7f75c48680d8e8f6c12fe79bda733d.dir
+  - path: models/trained.joblib
+    md5: 3c72b27ce6004ed5a93fa57f03a14bac
+  - path: src/predict.py
+    md5: 5f7d460b769b8679f6a36803e8b9c3ba
+  params:
+    params.yaml:
+      seed: 42
+  outs:
+  - path: results/predictions.joblib
+    md5: 4b969469dd836788ca7cbbfd477faf62
