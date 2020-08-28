@@ -27,6 +27,7 @@ stages:
     deps:
     - data/featured
     - models/untrained.joblib
+    - src/evaluate.py
     params:
     - cv
     - seed
