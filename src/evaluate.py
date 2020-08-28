@@ -81,7 +81,7 @@ def float_representer(dumper, value):
     return dumper.represent_scalar(u"tag:yaml.org,2002:float", text)
 
 
-yaml.add_representer(float, float_representer)
+yaml.SafeDumper.add_representer(float, float_representer)
 
 metrics = {
     "Mean Precision": mean(precision),
