@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import time
 from pathlib import Path
+from statistics import mean, stdev
 
 import joblib
 import numpy as np
@@ -75,26 +76,35 @@ for train_idx, test_idx in skf.split(X, y):
 auc_score = [auc(x, y) for x, y in zip(fpr_roc, tpr_roc)]
 
 # Now dump metrics
+def float_representer(dumper, value):
+    text = "{0:.4f}".format(value)
+    return dumper.represent_scalar(u"tag:yaml.org,2002:float", text)
+
+
+yaml.add_representer(float, float_representer)
+
 metrics = {
-    "Mean Precision": np.mean(precision),
-    "St.Dev. Precision": np.std(precision),
-    "Mean Recall": np.mean(recall),
-    "St.Dev. Recall": np.std(recall),
-    "Mean F-score": np.mean(fscore),
-    "St.Dev. F-score": np.std(fscore),
-    "Mean AUC": np.mean(auc_score),
-    "St.Dev. AUC": np.std(auc_score),
-    "Mean Training Time": np.mean(train_time),
-    "St.Dev. Training Time": np.std(train_time),
+    "Mean Precision": mean(precision),
+    "St.Dev. Precision": stdev(precision),
+    "Mean Recall": mean(recall),
+    "St.Dev. Recall": stdev(recall),
+    "Mean F-score": mean(fscore),
+    "St.Dev. F-score": stdev(fscore),
+    "Mean AUC": mean(auc_score),
+    "St.Dev. AUC": stdev(auc_score),
+    "Mean Training Time": mean(train_time),
+    "St.Dev. Training Time": stdev(train_time),
 }
 yaml.safe_dump(metrics, Path("results", "metrics.yaml"))
 
 # And plots
-pr_curve = pd.DataFrame({"Recall": recall_curve, "Precision": precision_curve})
+pr_curve = pd.DataFrame(
+    {"Recall": np.mean(recall_curve), "Precision": np.mean(precision_curve)}
+)
 pr_curve.to_csv(Path("results", "pr_curve.csv"), index=False)
 
 roc_curve = pd.DataFrame(
-    {"False Positive Rate": fpr_roc, "True Positive Rate": tpr_roc}
+    {"False Positive Rate": np.mean(fpr_roc), "True Positive Rate": np.mean(tpr_roc)}
 )
 roc_curve.to_csv(Path("results", "roc_curve.csv"), index=False)
 
